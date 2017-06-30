@@ -23,6 +23,7 @@
 			$('#grid').w2grid({
 				name: 'grid',
 				header: 'Funcionários',
+				recid: 'id',
 				show: {
 					toolbar: true,
 					footer: true,
@@ -116,22 +117,18 @@
             });
 			
 			var request = $.ajax({
-					type: 'GET',
-					dataType: 'json',
-					url: 'http://localhost:8080/funcionarios',
-					cache: false,
+				type: 'GET',
+				dataType: 'json',
+				url: 'http://localhost:8080/funcionarios',
+				cache: false,
 					
-					success: function(data) {
-						console.log("DATA: " + data);
-						requestRecords = data;
-						for (i in data) {
-							data[i].recid = data[i].id;
-						}
-						w2ui['grid'].add(data);
-					},
-					error: function(jqXHR, textStatus) {
-						console.log("ERROR: " + textStatus);
-					}					
+				success: function(data) {
+					console.log("DATA: " + data);
+					w2ui['grid'].add(data);
+				},
+				error: function(jqXHR, textStatus) {
+					console.log("ERROR: " + textStatus);
+				}					
 			});
 			
 			$(".w2ui-form-box").css('width', '100%');

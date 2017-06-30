@@ -190,12 +190,39 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (1, 'Acre', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (2, 'Alagoas', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (3, 'Amapá', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (4, 'Amazonas', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (5, 'Bahia', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (6, 'Ceará', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (7, 'Distrito Federal', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (8, 'Espírito Santo', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (9, 'Goiás', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (10, 'Maranhão', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (11, 'Mato Grosso', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (12, 'Mato Grosso do Sul', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (13, 'Minas Gerais', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (14, 'Pará', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (15, 'Paraíba', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (16, 'Paraná', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (17, 'Pernambuco', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (18, 'Piauí', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (19, 'Rio de Janeiro', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (20, 'Rio Grande do Norte', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (21, 'Rio Grande do Sul', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (22, 'Rondônia', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (23, 'Roraima', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (24, 'Santa Catarina', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (25, 'São Paulo', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (26, 'Sergipe', 'A');
+INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (27, 'Tocantins', 'A');
 
-INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (0, 'Paran�', 'A');
+
 INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (0, 0, 'Curitiba', 'A');
 INSERT INTO departamento(iddepartamento, nome, situacao, localizacao) VALUES (0, 'Financeiro', 'A', 'Primeiro andar');
 INSERT INTO cargo(idcargo, nome, situacao, percentualimposto, quantidademinimahorasmes, salario, gerente) VALUES (0, 'Gerente', 'A', 0.1, 100, 4000, 'S');
-INSERT INTO requisito(idrequisito, descricao) VALUES (0, 'Forma��o Superior');
+INSERT INTO requisito(idrequisito, descricao) VALUES (0, 'Forma��o Superior');
 INSERT INTO requisitocargo(idcargo, idrequisito) VALUES (0, 0);
 INSERT INTO funcionario(idfuncionario, bairro, celular, cep, complemento, cpf, email, nome, numero, rg, rua, senha, idunidadefederativareside, idcidadereside, idunidadefederativarg)
-VALUES (0, 'Santa C�ndida', '99672-4004', '82630-490', 'Casa 06', '064.635.199-01', 'gio.beltrame@gmail.com', 'Giovanni', '1343', '10.425.488-8', 'Estrada de Santa C�ndida', '1234', 0, 0, 0);
+VALUES (0, 'Santa C�ndida', '99672-4004', '82630-490', 'Casa 06', '064.635.199-01', 'gio.beltrame@gmail.com', 'Giovanni', '1343', '10.425.488-8', 'Estrada de Santa C�ndida', '1234', 0, 0, 0);

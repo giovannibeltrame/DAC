@@ -85,10 +85,7 @@ public class Funcionario implements Serializable {
 	
 	//bi-directional many-to-one association to Cidade
 	@ManyToOne()
-	@JoinColumns({
-		@JoinColumn(name="idunidadefederativareside", insertable=true, updatable=true),
-		@JoinColumn(name="idcidadereside", insertable=true, updatable=true)
-	})
+	@JoinColumn(name="idcidade", nullable=false)
 	private Cidade cidade;
 
 	public Funcionario() {

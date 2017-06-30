@@ -14,8 +14,11 @@ import javax.persistence.*;
 public class Cidade implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private CidadePK id;
+	@Id
+	@SequenceGenerator(name="seq_cidade", sequenceName="seq_cidade", allocationSize=1, initialValue=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_cidade")
+	@Column(name="idcidade", unique=true, nullable=false)
+	private Long id;
 
 	@Column(length=64)
 	private String nome;
@@ -25,17 +28,17 @@ public class Cidade implements Serializable {
 
 	//bi-directional many-to-one association to UnidadeFederativa
 	@ManyToOne
-	@JoinColumn(name="idunidadefederativa", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="idunidadefederativa", nullable=false)
 	private UnidadeFederativa unidadeFederativa;
 
 	public Cidade() {
 	}
 
-	public CidadePK getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(CidadePK id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

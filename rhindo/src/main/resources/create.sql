@@ -217,12 +217,10 @@ INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (24, '
 INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (25, 'São Paulo', 'A');
 INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (26, 'Sergipe', 'A');
 INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (27, 'Tocantins', 'A');
-
-
-INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (0, 0, 'Curitiba', 'A');
 INSERT INTO departamento(iddepartamento, nome, situacao, localizacao) VALUES (0, 'Financeiro', 'A', 'Primeiro andar');
 INSERT INTO cargo(idcargo, nome, situacao, percentualimposto, quantidademinimahorasmes, salario, gerente) VALUES (0, 'Gerente', 'A', 0.1, 100, 4000, 'S');
-INSERT INTO requisito(idrequisito, descricao) VALUES (0, 'Forma��o Superior');
+INSERT INTO requisito(idrequisito, descricao) VALUES (0, 'Formação Superior');
 INSERT INTO requisitocargo(idcargo, idrequisito) VALUES (0, 0);
-INSERT INTO funcionario(idfuncionario, bairro, celular, cep, complemento, cpf, email, nome, numero, rg, rua, senha, idunidadefederativareside, idcidadereside, idunidadefederativarg)
-VALUES (0, 'Santa C�ndida', '99672-4004', '82630-490', 'Casa 06', '064.635.199-01', 'gio.beltrame@gmail.com', 'Giovanni', '1343', '10.425.488-8', 'Estrada de Santa C�ndida', '1234', 0, 0, 0);
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (16, 0, 'Curitiba', 'A');
+INSERT INTO funcionario(idfuncionario, bairro, celular, cep, complemento, cpf, email, nome, numero, rg, rua, senha, idcidade)
+VALUES (0, 'Santa Cândida', '99672-4004', '82630-490', 'Casa 06', '064.635.199-01', 'gio.beltrame@gmail.com', 'Giovanni', '1343', '10.425.488-8', 'Estrada de Santa Cândida', '1234', 0);

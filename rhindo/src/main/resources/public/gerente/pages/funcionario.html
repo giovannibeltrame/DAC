@@ -69,15 +69,14 @@
                 header: 'Gerenciador de Funcionários',
                 name: 'form',
                 fields: [
-                    { name: 'idfuncionario', type: 'text', html: { caption: 'Cód.', attr: 'size="10" readonly' } },
+                    { name: 'id', type: 'text', html: { caption: 'Cód.', attr: 'size="10" readonly' } },
                     { name: 'nome', type: 'text', required: true, html: { caption: 'Nome', attr: 'size="40" maxlength="40"' } },
                     { name: 'celular', type: 'text', required: true, html: { caption: 'Celular', attr: 'size="40" maxlength="40"' } },
                     { name: 'email', type: 'text', required: true, html: { caption: 'Email', attr: 'size="40" maxlength="40"' } },
                     { name: 'senha', type: 'text', required: true, html: { caption: 'Senha', attr: 'size="40" maxlength="40"' } },
                     { name: 'cpf', type: 'text', required: true, html: { caption: 'CPF', attr: 'size="40" maxlength="40"' } },
                     { name: 'rg', type: 'text', required: true, html: { caption: 'RG', attr: 'size="40" maxlength="40"' } },
-                    { name: 'uf', type: 'text', required: true, html: { caption: 'UF', attr: 'size="40" maxlength="40"' } },
-                    { name: 'cidade', type: 'text', required: true, html: { caption: 'Cidade', attr: 'size="40" maxlength="40"' } },
+                    { name: 'cidade', type: 'list', required: true, html: { caption: 'Cidade' }, options: { items: [{id: 0, text: 'Curitiba'}, {id: 1, text: 'Sao Paulo'} ] } },
                     { name: 'rua', type: 'text', required: true, html: { caption: 'Rua', attr: 'size="40" maxlength="40"' } },
                     { name: 'numero', type: 'text', required: true, html: { caption: 'Número', attr: 'size="40" maxlength="40"' } },
                     { name: 'complemento', type: 'text', required: true, html: { caption: 'Complemento', attr: 'size="40" maxlength="40"' } },
@@ -116,8 +115,6 @@
 				}
             });
 			
-			var requestRecords = {};
-			
 			var request = $.ajax({
 					type: 'GET',
 					dataType: 'json',
@@ -127,10 +124,10 @@
 					success: function(data) {
 						console.log("DATA: " + data);
 						requestRecords = data;
-						for (i in requestRecords) {
-							requestRecords[i].recid = requestRecords[i].id;
+						for (i in data) {
+							data[i].recid = data[i].id;
 						}
-						w2ui['grid'].add(requestRecords);
+						w2ui['grid'].add(data);
 					},
 					error: function(jqXHR, textStatus) {
 						console.log("ERROR: " + textStatus);

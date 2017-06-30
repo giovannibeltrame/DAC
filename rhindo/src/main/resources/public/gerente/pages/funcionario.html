@@ -19,12 +19,9 @@
 		$(function(){
 			
 			w2utils.locale('../../lib/bower_components/w2ui/locale/pt-br.json');
-			
+				
 			$('#grid').w2grid({
 				name: 'grid',
-				url: {
-					get: 'http://' + window.location.host + '/funcionario'
-				},
 				header: 'Funcionários',
 				show: {
 					toolbar: true,
@@ -34,14 +31,13 @@
 				},
 				sortData: [{ field: 'recid', direction: 'ASC' }],
 				columns: [
-					{ field: 'idfuncionario', caption: 'Cód.', size: '10%' },
+					{ field: 'id', caption: 'Cód.', size: '10%' },
 					{ field: 'nome', caption: 'Nome', size: '10%' },
 					{ field: 'celular', caption: 'Celular', size: '10%' },
 					{ field: 'email', caption: 'Email', size: '10%' },
 					{ field: 'senha', caption: 'Senha', size: '10%' },
 					{ field: 'cpf', caption: 'CPF', size: '10%' },
 					{ field: 'rg', caption: 'RG', size: '10%' },
-					{ field: 'uf', caption: 'UF', size: '10%' },
 					{ field: 'cidade', caption: 'Cidade', size: '10%' },
 					{ field: 'rua', caption: 'Rua', size: '10%' },
 					{ field: 'numero', caption: 'Número', size: '10%' },
@@ -70,7 +66,6 @@
 			});
 			
 			$("#form").w2form({ 
-                url: '',
                 header: 'Gerenciador de Funcionários',
                 name: 'form',
                 fields: [
@@ -120,6 +115,27 @@
                     } 
 				}
             });
+			
+			var requestRecords = {};
+			
+			var request = $.ajax({
+					type: 'GET',
+					dataType: 'json',
+					url: 'http://localhost:8080/funcionarios',
+					cache: false,
+					
+					success: function(data) {
+						console.log("DATA: " + data);
+						requestRecords = data;
+						for (i in requestRecords) {
+							requestRecords[i].recid = requestRecords[i].id;
+						}
+						w2ui['grid'].add(requestRecords);
+					},
+					error: function(jqXHR, textStatus) {
+						console.log("ERROR: " + textStatus);
+					}					
+			});
 			
 			$(".w2ui-form-box").css('width', '100%');
         });

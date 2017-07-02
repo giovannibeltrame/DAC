@@ -32,6 +32,7 @@ public class FuncionarioService {
 	}
 
 	public Funcionario save(Funcionario f) throws Exception {
+		SimpleMD5 md5 = new SimpleMD5("brq", f.getSenha());
 		f = this.funcionarioRepository.saveAndFlush(f);
 		return f;
 	}

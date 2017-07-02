@@ -61,6 +61,7 @@ $(function(){
 			{ name: 'celular', type: 'text', required: true, html: { caption: 'Celular', attr: 'size="40" maxlength="16"' } },
 			{ name: 'email', type: 'text', required: true, html: { caption: 'Email', attr: 'size="40" maxlength="64"' } },
 			{ name: 'senha', type: 'password', required: true, html: { caption: 'Senha', attr: 'size="40" maxlength="32"' } },
+			{ name: 'confirmarsenha', type: 'password', required: true, html: { caption: 'Confirme a senha', attr: 'size="40" maxlength="32"' } },
 			{ name: 'cpf', type: 'text', required: true, html: { caption: 'CPF', attr: 'size="40" maxlength="16"' } },
 			{ name: 'rg', type: 'text', required: true, html: { caption: 'RG', attr: 'size="40" maxlength="16"' } },
 //			{ name: 'cidade', type: 'list', required: true, html: { caption: 'Cidade' } },
@@ -79,7 +80,17 @@ $(function(){
 				if (errors.length > 0) {
 					return;
 				}
+				var msg = validateForm(w2ui.form.record);
+				if (msg) {
+					w2popup.open({
+						title: 'Erro',
+						body: '<div class="w2ui-centered">' + msg + '</div>',
+	                    showMax: true
+					});
+					return;
+				}
 				delete w2ui.form.record.recid;
+				delete w2ui.form.record.confirmarsenha;
 				if (w2ui.form.record.id == '') {
 					requestInsert();
 				} else {
@@ -88,6 +99,56 @@ $(function(){
 			}
 		}
 	});
+	
+	function validateForm(record) {
+		if (!(record.senha.trim() !== '' && record.senha.trim() === record.confirmarsenha.trim())) {
+			return 'As senhas informadas são diferentes.';
+		}
+		if (!w2utils.isEmail(record.email)) {
+			return 'O email informado não é válido.';
+		}
+		if (!TestaCPF(record.cpf)) {
+			return 'O CPF informado não é válido.';
+		}
+		if (record.cep.replace(/[^\d]+/g,'').length !== 8) {
+			return 'O CEP informado não é válido.';
+		}
+		return;
+	}
+	
+	function TestaCPF(strCPF) {
+		var Soma = 0, Resto = 0;
+	    strCPF = strCPF.replace(/[^\d]+/g,''); 
+	    if (strCPF.length != 11 || 
+	    strCPF === "00000000000" || 
+	    strCPF === "11111111111" || 
+	    strCPF === "22222222222" || 
+	    strCPF === "33333333333" || 
+	    strCPF === "44444444444" || 
+	    strCPF === "55555555555" || 
+	    strCPF === "66666666666" || 
+	    strCPF === "77777777777" || 
+	    strCPF === "88888888888" || 
+	    strCPF === "99999999999")
+	    	return false;  
+
+	    for (i=1; i<=9; i++)
+	    	Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+	    Resto = (Soma * 10) % 11;
+	    if ((Resto === 10) || (Resto === 11))
+	    	Resto = 0;
+	    if (Resto != parseInt(strCPF.substring(9, 10)) )
+	    	return false;
+	    Soma = 0;
+	    for (i = 1; i <= 10; i++)
+	    	Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+	    Resto = (Soma * 10) % 11;
+
+	    if ((Resto === 10) || (Resto === 11))
+	    	Resto = 0;
+	    if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+	    return true;
+	}
 	
 	requestFindAll();
 	function requestFindAll() {
@@ -210,6 +271,10 @@ $(function(){
 //			console.log('ERROR: ' + textStatus);
 //		}					
 //	});
+	
+	$("#cpf").mask("999.999.999-99", {autoclear: false});
+	$("#cep").mask("99.999-999", {autoclear: false});
+    $("#celular").mask('(99)99999-9999', {autoclear: false});
 
 	$(".w2ui-form-box").css('width', '100%');
 	$(".w2ui-field").css('display', 'inline-block');

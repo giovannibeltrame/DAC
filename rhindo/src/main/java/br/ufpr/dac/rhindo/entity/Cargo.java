@@ -1,9 +1,16 @@
 package br.ufpr.dac.rhindo.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 
 /**
@@ -40,13 +47,13 @@ public class Cargo implements Serializable {
 	@Column(length=1)
 	private String situacao;
 
-	//bi-directional many-to-one association to CargoAtribuidoFuncionario
-	@OneToMany(mappedBy="cargo")
-	private List<CargoAtribuidoFuncionario> cargoAtribuidoFuncionarios;
-
-	//bi-directional many-to-many association to Requisito
-	@ManyToMany(mappedBy="cargos")
-	private List<Requisito> requisitos;
+//	//bi-directional many-to-one association to CargoAtribuidoFuncionario
+//	@OneToMany(mappedBy="cargo")
+//	private List<CargoAtribuidoFuncionario> cargoAtribuidoFuncionarios;
+//
+//	//bi-directional many-to-many association to Requisito
+//	@ManyToMany(mappedBy="cargos")
+//	private List<Requisito> requisitos;
 
 	public Cargo() {
 	}
@@ -107,34 +114,34 @@ public class Cargo implements Serializable {
 		this.situacao = situacao;
 	}
 
-	public List<CargoAtribuidoFuncionario> getCargoAtribuidoFuncionarios() {
-		return this.cargoAtribuidoFuncionarios;
-	}
-
-	public void setCargoAtribuidoFuncionarios(List<CargoAtribuidoFuncionario> cargoAtribuidoFuncionarios) {
-		this.cargoAtribuidoFuncionarios = cargoAtribuidoFuncionarios;
-	}
-
-	public CargoAtribuidoFuncionario addCargoatribuidofuncionario(CargoAtribuidoFuncionario cargoAtribuidoFuncionario) {
-		getCargoAtribuidoFuncionarios().add(cargoAtribuidoFuncionario);
-		cargoAtribuidoFuncionario.setCargo(this);
-
-		return cargoAtribuidoFuncionario;
-	}
-
-	public CargoAtribuidoFuncionario removeCargoatribuidofuncionario(CargoAtribuidoFuncionario cargoAtribuidoFuncionario) {
-		getCargoAtribuidoFuncionarios().remove(cargoAtribuidoFuncionario);
-		cargoAtribuidoFuncionario.setCargo(null);
-
-		return cargoAtribuidoFuncionario;
-	}
-
-	public List<Requisito> getRequisitos() {
-		return this.requisitos;
-	}
-
-	public void setRequisitos(List<Requisito> requisitos) {
-		this.requisitos = requisitos;
-	}
+//	public List<CargoAtribuidoFuncionario> getCargoAtribuidoFuncionarios() {
+//		return this.cargoAtribuidoFuncionarios;
+//	}
+//
+//	public void setCargoAtribuidoFuncionarios(List<CargoAtribuidoFuncionario> cargoAtribuidoFuncionarios) {
+//		this.cargoAtribuidoFuncionarios = cargoAtribuidoFuncionarios;
+//	}
+//
+//	public CargoAtribuidoFuncionario addCargoatribuidofuncionario(CargoAtribuidoFuncionario cargoAtribuidoFuncionario) {
+//		getCargoAtribuidoFuncionarios().add(cargoAtribuidoFuncionario);
+//		cargoAtribuidoFuncionario.setCargo(this);
+//
+//		return cargoAtribuidoFuncionario;
+//	}
+//
+//	public CargoAtribuidoFuncionario removeCargoatribuidofuncionario(CargoAtribuidoFuncionario cargoAtribuidoFuncionario) {
+//		getCargoAtribuidoFuncionarios().remove(cargoAtribuidoFuncionario);
+//		cargoAtribuidoFuncionario.setCargo(null);
+//
+//		return cargoAtribuidoFuncionario;
+//	}
+//
+//	public List<Requisito> getRequisitos() {
+//		return this.requisitos;
+//	}
+//
+//	public void setRequisitos(List<Requisito> requisitos) {
+//		this.requisitos = requisitos;
+//	}
 
 }

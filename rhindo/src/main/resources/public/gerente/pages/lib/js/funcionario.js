@@ -28,6 +28,11 @@ $(function(){
 			{ field: 'bairro', caption: 'Bairro', size: '10%' },
 			{ field: 'cep', caption: 'CEP', size: '10%' }
 		],
+		searches: [
+			{ field: 'id', caption: 'Cód.', type: 'int' },
+			{ field: 'nome', caption: 'Nome', type: 'text' },
+			{ field: 'cpf', caption: 'CPF', type: 'text' }
+		],
 		onClick: function(event) {
 			var grid = this;
 			var form = w2ui.form;

@@ -39,7 +39,6 @@ $(function(){
                 	form.recid  = sel[0];
                     form.record = $.extend(true, {}, grid.get(sel[0]));
                     form.refresh();
-                    $("#salario").change();
                 } else {
                 	form.clear();
                 }
@@ -50,7 +49,8 @@ $(function(){
 		},
 		onDelete: function(event) {
 	        if (event.force) {
-	        	requestDelete();
+	        	var record = $.extend(true, {}, w2ui.form.record);
+	        	requestDelete(record);
 	        }
 	    }    
 	});
@@ -64,8 +64,8 @@ $(function(){
 			{ name: 'percentualImposto', type: 'text', required: true, html: { caption: '% Imposto', attr: 'size="40" maxlength="32"' } },
 			{ name: 'quantidadeMinimaHorasMes', type: 'int', required: true, options: { autoFormat: false }, html: { caption: 'Qtde. Mínima Horas Mês', attr: 'size="40" maxlength="8"' } },
 			{ name: 'salario', type: 'text', html: { caption: 'Salário', attr: 'size="40" maxlength="32"' } },
-			{ name: 'gerente', type: 'list', required: true, html: { caption: 'Gerente' }, options: { items: gerente } },
-			{ name: 'situacao', type: 'list', required: true, html: { caption: 'Situação' }, options: { items: situacao } }
+			{ name: 'gerente', type: 'list', required: true, options: { items: gerente }, html: { caption: 'Gerente' } },
+			{ name: 'situacao', type: 'list', required: true, options: { items: situacao }, html: { caption: 'Situação' } }
 		],
 		actions: {
 			Reset: function () {
@@ -76,13 +76,14 @@ $(function(){
 				if (errors.length > 0) {
 					return;
 				}
-				delete w2ui.form.record.recid;
-				w2ui.form.record.gerente = w2ui.form.record.gerente.id;
-				w2ui.form.record.situacao = w2ui.form.record.situacao.id;
-				if (w2ui.form.record.id == '') {
-					requestInsert();
+				var record = $.extend(true, {}, w2ui.form.record);
+				delete record.recid;
+				record.gerente = record.gerente.id;
+				record.situacao = record.situacao.id;
+				if (record.id === '') {
+					requestInsert(record);
 				} else {
-					requestUpdate();
+					requestUpdate(record);
 				}
 			}
 		}
@@ -111,10 +112,10 @@ $(function(){
 		});
 	}
 	
-	function requestInsert() {
+	function requestInsert(record) {
 		$.ajax({
 			type: 'POST',
-			data: JSON.stringify(w2ui.form.record),
+			data: JSON.stringify(record),
 			contentType: 'application/json',
 			dataType: 'json',
 			url: 'http://' + window.location.host + '/cargos',
@@ -138,10 +139,10 @@ $(function(){
 		});
 	}
 	
-	function requestUpdate() {
+	function requestUpdate(record) {
 		$.ajax({
 			type: 'PUT',
-			data: JSON.stringify(w2ui.form.record),
+			data: JSON.stringify(record),
 			contentType: 'application/json',
 			dataType: 'json',
 			url: 'http://' + window.location.host + '/cargos',
@@ -165,10 +166,10 @@ $(function(){
 		});
 	}
 	
-	function requestDelete() {
+	function requestDelete(record) {
 		$.ajax({
     		type: 'DELETE',
-    		url: 'http://' + window.location.host + '/cargos/' + w2ui.form.recid,
+    		url: 'http://' + window.location.host + '/cargos/' + record.id,
     		cache: false,
     					
     		success: function(data) {

@@ -1,8 +1,14 @@
 package br.ufpr.dac.atoa.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
@@ -28,9 +34,9 @@ public class Funcionario implements Serializable {
 	@Column(length=255)
 	private String senha;
 
-	//bi-directional many-to-one association to Atividade
-	@OneToMany(mappedBy="funcionario")
-	private List<Atividade> atividades;
+//	//bi-directional many-to-one association to Atividade
+//	@OneToMany(mappedBy="funcionario")
+//	private List<Atividade> atividades;
 
 	//bi-directional many-to-one association to Departamento
 	@ManyToOne
@@ -43,6 +49,14 @@ public class Funcionario implements Serializable {
 	private Cargo cargo;
 
 	public Funcionario() {
+	}
+	
+	public Funcionario(Long id, String email, String nome, String senha) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.nome = nome;
+		this.senha = senha;
 	}
 
 	public Long getId() {
@@ -77,27 +91,27 @@ public class Funcionario implements Serializable {
 		this.senha = senha;
 	}
 
-	public List<Atividade> getAtividades() {
-		return this.atividades;
-	}
-
-	public void setAtividades(List<Atividade> atividades) {
-		this.atividades = atividades;
-	}
-
-	public Atividade addAtividade(Atividade atividade) {
-		getAtividades().add(atividade);
-		atividade.setFuncionario(this);
-
-		return atividade;
-	}
-
-	public Atividade removeAtividade(Atividade atividade) {
-		getAtividades().remove(atividade);
-		atividade.setFuncionario(null);
-
-		return atividade;
-	}
+//	public List<Atividade> getAtividades() {
+//		return this.atividades;
+//	}
+//
+//	public void setAtividades(List<Atividade> atividades) {
+//		this.atividades = atividades;
+//	}
+//
+//	public Atividade addAtividade(Atividade atividade) {
+//		getAtividades().add(atividade);
+//		atividade.setFuncionario(this);
+//
+//		return atividade;
+//	}
+//
+//	public Atividade removeAtividade(Atividade atividade) {
+//		getAtividades().remove(atividade);
+//		atividade.setFuncionario(null);
+//
+//		return atividade;
+//	}
 
 	public Departamento getDepartamento() {
 		return this.departamento;

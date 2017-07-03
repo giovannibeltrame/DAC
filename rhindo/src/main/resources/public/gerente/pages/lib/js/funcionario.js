@@ -1,7 +1,9 @@
 $(function(){
 	
+	w2utils.locale('../../../../lib/bower_components/w2ui/locale/pt-br.json');
+	
 	var cidade = [];
-	var request = $.ajax({
+	$.ajax({
 		type: 'GET',
 		dataType: 'json',
 		url: 'http://' + window.location.host + '/cidades',
@@ -9,19 +11,15 @@ $(function(){
 		async: false,
 					
 		success: function(data) {
-			console.log('DATA: ' + data);
-			cidade = data;
+			cidade = $.extend(true, [], data);
 			for (i in cidade) {
 				cidade[i].text = cidade[i].nome;
 			}
-			console.log(cidade);
-			$('input[name=cidade]').w2field('list', { items: cidade });
 		},
 		error: function(jqXHR, textStatus) {
 			console.log('ERROR: ' + textStatus);
 		}					
 	});
-	w2utils.locale('../../../../lib/bower_components/w2ui/locale/pt-br.json');
 			
 	$('#grid').w2grid({
 		name: 'grid',
@@ -39,7 +37,6 @@ $(function(){
 			{ field: 'nome', caption: 'Nome', size: '10%' },
 			{ field: 'celular', caption: 'Celular', size: '10%' },
 			{ field: 'email', caption: 'Email', size: '10%' },
-//			{ field: 'senha', caption: 'Senha', size: '10%' },
 			{ field: 'cpf', caption: 'CPF', size: '10%' },
 			{ field: 'rg', caption: 'RG', size: '10%' },
 			{ field: 'cidade', caption: 'Cidade', size: '10%', render: function(record) { return record.cidade && record.cidade.nome; } },
@@ -107,7 +104,8 @@ $(function(){
 				if (errors.length > 0) {
 					return;
 				}
-				var msg = validateForm(w2ui.form.record);
+				var record = $.extend(true, {}, w2ui.form.record);
+				var msg = validateForm(record);
 				if (msg) {
 					w2popup.open({
 						title: 'Erro',
@@ -116,7 +114,6 @@ $(function(){
 					});
 					return;
 				}
-				var record = $.extend(true, {}, w2ui.form.record);
 				delete record.recid;
 				delete record.confirmarsenha;
 				delete record.cidade.text;

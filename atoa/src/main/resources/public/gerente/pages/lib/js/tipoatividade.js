@@ -3,10 +3,28 @@ $(function(){
 	w2utils.locale('../../../../lib/bower_components/w2ui/locale/pt-br.json');
 	
 	var situacao = [ { id: 'A', text: 'Ativa' }, { id: 'I', text: 'Inativa' } ];
+	var departamento = [];
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		url: 'http://' + window.location.host + '/departamentos',
+		cache: false,
+		async: false,
+					
+		success: function(data) {
+			departamento = $.extend(true, [], data);
+			for (i in departamento) {
+				departamento[i].text = departamento[i].nome;
+			}
+		},
+		error: function(jqXHR, textStatus) {
+			console.log('ERROR: ' + textStatus);
+		}					
+	});
 	
 	$('#grid').w2grid({
 		name: 'grid',
-		header: 'Departamentos',
+		header: 'Tipos de Atividade',
 		recid: 'id',
 		show: {
 			toolbar: true,
@@ -17,13 +35,14 @@ $(function(){
 		sortData: [{ field: 'recid', direction: 'ASC' }],
 		columns: [
 			{ field: 'id', caption: 'Cód.', size: '10%' },
-			{ field: 'nome', caption: 'Nome', size: '40%' },
-			{ field: 'localizacao', caption: 'Localização', size: '40%' },
-			{ field: 'situacao', caption: 'Situação', size: '10%', render: function(record) { return record.situacao == 'A' ? 'Ativa' : 'Inativa'; } }
+			{ field: 'nome', caption: 'Nome', size: '10%' },
+			{ field: 'situacao', caption: 'Situação', size: '10%', render: function(record) { return record.situacao == 'A' ? 'Ativa' : 'Inativa'; } },
+			{ field: 'departamento', caption: 'Departamento', size: '10%', render: function(record) { return record.departamento && record.departamento.nome; } }
 		],
 		searches: [
 			{ field: 'id', caption: 'Cód.', type: 'int' },
-			{ field: 'nome', caption: 'Nome', type: 'text' }
+			{ field: 'nome', caption: 'Nome', type: 'text' },
+			{ field: 'departamento', caption: 'Departamento', type: 'text' }
 		],
 		onClick: function(event) {
 			var grid = this;
@@ -49,15 +68,15 @@ $(function(){
 	        }
 	    }    
 	});
-	
+			
 	$('#form').w2form({
-		header: 'Gerenciador de Departamentos',
+		header: 'Gerenciador de Tipos de Atividade',
 		name: 'form',
 		fields: [
 			{ name: 'id', type: 'text', html: { caption: 'Cód.', attr: 'size="40" readonly' } },
 			{ name: 'nome', type: 'text', required: true, html: { caption: 'Nome', attr: 'size="40" maxlength="255"' } },
-			{ name: 'localizacao', type: 'text', required: true, html: { caption: 'Localização', attr: 'size="40" maxlength="255"' } },
-			{ name: 'situacao', type: 'list', required: true, options: { items: situacao }, html: { caption: 'Situação' } }
+			{ name: 'situacao', type: 'list', required: true, options: { items: situacao }, html: { caption: 'Situação', attr: 'size="40"' } },
+			{ name: 'departamento', type: 'list', required: true, options: { items: departamento }, html: { caption: 'Departamento', attr: 'size="40"' } }
 		],
 		actions: {
 			Reset: function () {
@@ -70,6 +89,7 @@ $(function(){
 				}
 				var record = $.extend(true, {}, w2ui.form.record);
 				delete record.recid;
+				delete record.departamento.text;
 				record.situacao = record.situacao.id;
 				if (record.id === '') {
 					requestInsert(record);
@@ -87,7 +107,7 @@ $(function(){
 		$.ajax({
 			type: 'GET',
 			dataType: 'json',
-			url: 'http://' + window.location.host + '/departamentos',
+			url: 'http://' + window.location.host + '/tiposatividades',
 			cache: false,
 						
 			success: function(data) {
@@ -96,7 +116,7 @@ $(function(){
 			error: function(jqXHR, ajaxOptions, thrownError) {
     			w2popup.open({
 					title: 'Erro',
-					body: '<div class="w2ui-centered">Erro ao buscar os departamentos.<br/>' + thrownError + jqXHR.responseText + '</div>',
+					body: '<div class="w2ui-centered">Erro ao buscar os tipos de atividade.<br/>' + thrownError + jqXHR.responseText + '</div>',
                     showMax: true
 				});
     		}	
@@ -109,13 +129,13 @@ $(function(){
 			data: JSON.stringify(record),
 			contentType: 'application/json',
 			dataType: 'json',
-			url: 'http://' + window.location.host + '/departamentos',
+			url: 'http://' + window.location.host + '/tiposatividades',
 			cache: false,
 			
 			success: function(data) {
 				w2popup.open({
 					title: 'Sucesso',
-					body: '<div class="w2ui-centered">Departamento inserido com sucesso.</div>',
+					body: '<div class="w2ui-centered">Tipo de atividade inserido com sucesso.</div>',
                     showMax: true
 				});
 				requestFindAll();
@@ -123,7 +143,7 @@ $(function(){
 			error: function(jqXHR, ajaxOptions, thrownError) {
     			w2popup.open({
 					title: 'Erro',
-					body: '<div class="w2ui-centered">Erro ao inserir o departamento.<br/>' + thrownError + jqXHR.responseText + '</div>',
+					body: '<div class="w2ui-centered">Erro ao inserir o tipo de atividade.<br/>' + thrownError + jqXHR.responseText + '</div>',
                     showMax: true
 				});
     		}
@@ -136,13 +156,13 @@ $(function(){
 			data: JSON.stringify(record),
 			contentType: 'application/json',
 			dataType: 'json',
-			url: 'http://' + window.location.host + '/departamentos',
+			url: 'http://' + window.location.host + '/tiposatividades',
 			cache: false,
 			
 			success: function(data) {
 				w2popup.open({
 					title: 'Sucesso',
-					body: '<div class="w2ui-centered">Departamento editado com sucesso.</div>',
+					body: '<div class="w2ui-centered">Tipo de atividade editado com sucesso.</div>',
                     showMax: true
 				});
 				requestFindAll();
@@ -150,7 +170,7 @@ $(function(){
 			error: function(jqXHR, ajaxOptions, thrownError) {
     			w2popup.open({
 					title: 'Erro',
-					body: '<div class="w2ui-centered">Erro ao editar o departamento.<br/>' + thrownError + jqXHR.responseText + '</div>',
+					body: '<div class="w2ui-centered">Erro ao editar o tipo de atividade.<br/>' + thrownError + jqXHR.responseText + '</div>',
                     showMax: true
 				});
     		}
@@ -160,13 +180,13 @@ $(function(){
 	function requestDelete(record) {
 		$.ajax({
     		type: 'DELETE',
-    		url: 'http://' + window.location.host + '/departamentos/' + record.id,
+    		url: 'http://' + window.location.host + '/tiposatividades/' + record.id,
     		cache: false,
     					
     		success: function(data) {
     			w2popup.open({
 					title: 'Sucesso',
-					body: '<div class="w2ui-centered">Departamento excluído com sucesso.</div>',
+					body: '<div class="w2ui-centered">Tipo de atividade excluído com sucesso.</div>',
                     showMax: true
 				});
     			requestFindAll();
@@ -174,14 +194,13 @@ $(function(){
     		error: function(jqXHR, ajaxOptions, thrownError) {
     			w2popup.open({
 					title: 'Erro',
-					body: '<div class="w2ui-centered">Erro ao excluir o departamento.<br/>' + thrownError + jqXHR.responseText + '</div>',
+					body: '<div class="w2ui-centered">Erro ao excluir o tipo de atividade.<br/>' + thrownError + jqXHR.responseText + '</div>',
                     showMax: true
 				});
     		}
     	});
 	}
-	
+					
 	$(".w2ui-form-box").css('width', '100%');
 	$(".w2ui-field").css('display', 'inline-block');
-	
 });

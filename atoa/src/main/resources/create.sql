@@ -100,3 +100,14 @@ REFERENCES public.Funcionario (idFuncionario)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
+
+
+
+
+INSERT INTO departamento(iddepartamento, nome, situacao, localizacao) VALUES (1, 'Financeiro', 'A', 'Primeiro andar');
+INSERT INTO cargo(idcargo, nome, situacao, gerente) VALUES (1, 'Gerente', 'A', 'S')
+INSERT INTO funcionario(idfuncionario, email, nome, senha, idcargo, iddepartamento)
+VALUES (1, 'gio.beltrame@gmail.com', 'Giovanni', '1234', null, null);
+INSERT INTO tipoatividade(idtipoatividade, nome, situacao, iddepartamento) VALUES (nextval('public.seq_tipoatividade'), 'Contas à pagar', 'A', 1);
+INSERT INTO atividade(idatividade, datahoracadastro, datahorainicio, datahorafim, datahoraprevisaoinicio, datahoraprevisaofim, descricao, idfuncionario, idtipoatividade)
+VALUES (nextval('public.seq_atividade'), now()::timestamp, null, null, '2017-07-04 08:00:00', '2017-07-07 17:00:00', 'Pagamento de salários', 1, 1);

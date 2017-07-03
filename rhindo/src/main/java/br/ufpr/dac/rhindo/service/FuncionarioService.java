@@ -16,7 +16,7 @@ public class FuncionarioService {
 	private FuncionarioRepository funcionarioRepository;
 
 	public List<Funcionario> findAll() throws Exception {
-		List<Funcionario> list = this.funcionarioRepository.findAll();
+		List<Funcionario> list = this.funcionarioRepository.find();
 		if (list == null || list.isEmpty()) {
 			throw new ResourceNotFoundException();
 		}

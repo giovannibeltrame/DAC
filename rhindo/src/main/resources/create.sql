@@ -217,10 +217,41 @@ INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (24, '
 INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (25, 'São Paulo', 'A');
 INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (26, 'Sergipe', 'A');
 INSERT INTO unidadefederativa(idunidadefederativa, nome, situacao) VALUES (27, 'Tocantins', 'A');
-INSERT INTO departamento(iddepartamento, nome, situacao, localizacao) VALUES (0, 'Financeiro', 'A', 'Primeiro andar');
-INSERT INTO cargo(idcargo, nome, situacao, percentualimposto, quantidademinimahorasmes, salario, gerente) VALUES (0, 'Gerente', 'A', 0.1, 100, 4000, 'S');
-INSERT INTO requisito(idrequisito, descricao) VALUES (0, 'Formação Superior');
-INSERT INTO requisitocargo(idcargo, idrequisito) VALUES (0, 0);
-INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (16, 0, 'Curitiba', 'A');
+
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (1, nextval('public.seq_cidade'), 'Rio Branco', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (2, nextval('public.seq_cidade'), 'Maceió', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (3, nextval('public.seq_cidade'), 'Macapá', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (4, nextval('public.seq_cidade'), 'Manaus', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (5, nextval('public.seq_cidade'), 'Salvador', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (6, nextval('public.seq_cidade'), 'Fortaleza', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (7, nextval('public.seq_cidade'), 'Brasília', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (8, nextval('public.seq_cidade'), 'Vitória', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (9, nextval('public.seq_cidade'), 'Goiânia', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (10, nextval('public.seq_cidade'), 'São Luís', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (11, nextval('public.seq_cidade'), 'Cuiabá', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (12, nextval('public.seq_cidade'), 'Campo Grande', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (13, nextval('public.seq_cidade'), 'Belo Horizonte', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (14, nextval('public.seq_cidade'), 'Belém', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (15, nextval('public.seq_cidade'), 'João Pessoa', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (16, nextval('public.seq_cidade'), 'Curitiba', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (17, nextval('public.seq_cidade'), 'Recife', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (18, nextval('public.seq_cidade'), 'Teresina', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (19, nextval('public.seq_cidade'), 'Rio de Janeiro', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (20, nextval('public.seq_cidade'), 'Natal', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (21, nextval('public.seq_cidade'), 'Porto Alegre', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (22, nextval('public.seq_cidade'), 'Porto Velho', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (23, nextval('public.seq_cidade'), 'Boa Vista', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (24, nextval('public.seq_cidade'), 'Florianópolis', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (25, nextval('public.seq_cidade'), 'São Paulo', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (26, nextval('public.seq_cidade'), 'Aracaju', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (27, nextval('public.seq_cidade'), 'Palmas', 'A');
+
+
+INSERT INTO departamento(iddepartamento, nome, situacao, localizacao) VALUES (nextval('public.seq_departamento'), 'Financeiro', 'A', 'Primeiro andar');
+INSERT INTO cargo(idcargo, nome, situacao, percentualimposto, quantidademinimahorasmes, salario, gerente) VALUES (nextval('public.seq_cargo'), 'Gerente', 'A', 0.1, 100, 4000., 'S');
+INSERT INTO requisito(idrequisito, descricao) VALUES (nextval('public.seq_requisito'), 'Formação Superior');
+INSERT INTO requisitocargo(idcargo, idrequisito) VALUES (1, 1);
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (16, nextval('public.seq_cidade'), 'Curitiba', 'A');
+INSERT INTO cidade(idunidadefederativa, idcidade, nome, situacao) VALUES (25, nextval('public.seq_cidade'), 'São Paulo', 'A');
 INSERT INTO funcionario(idfuncionario, bairro, celular, cep, complemento, cpf, email, nome, numero, rg, rua, senha, idcidade)
-VALUES (0, 'Santa Cândida', '99672-4004', '82630-490', 'Casa 06', '064.635.199-01', 'gio.beltrame@gmail.com', 'Giovanni', '1343', '10.425.488-8', 'Estrada de Santa Cândida', '1234', 0);
+VALUES (nextval('public.seq_funcionario'), 'Santa Cândida', '(41)99672-4004', '82.630-490', 'Casa 06', '064.635.199-01', 'gio.beltrame@gmail.com', 'Giovanni', '1343', '10.425.488-8', 'Estrada de Santa Cândida', '1234', 16);

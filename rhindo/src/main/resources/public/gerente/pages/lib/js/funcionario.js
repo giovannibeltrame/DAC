@@ -1,5 +1,26 @@
 $(function(){
-			
+	
+	var cidade = [];
+	var request = $.ajax({
+		type: 'GET',
+		dataType: 'json',
+		url: 'http://' + window.location.host + '/cidades',
+		cache: false,
+		async: false,
+					
+		success: function(data) {
+			console.log('DATA: ' + data);
+			cidade = data;
+			for (i in cidade) {
+				cidade[i].text = cidade[i].nome;
+			}
+			console.log(cidade);
+			$('input[name=cidade]').w2field('list', { items: cidade });
+		},
+		error: function(jqXHR, textStatus) {
+			console.log('ERROR: ' + textStatus);
+		}					
+	});
 	w2utils.locale('../../../../lib/bower_components/w2ui/locale/pt-br.json');
 			
 	$('#grid').w2grid({
@@ -21,7 +42,7 @@ $(function(){
 //			{ field: 'senha', caption: 'Senha', size: '10%' },
 			{ field: 'cpf', caption: 'CPF', size: '10%' },
 			{ field: 'rg', caption: 'RG', size: '10%' },
-//			{ field: 'cidade', caption: 'Cidade', size: '10%', render: function(record) { return record.cidade.nome; } },
+			{ field: 'cidade', caption: 'Cidade', size: '10%', render: function(record) { return record.cidade && record.cidade.nome; } },
 			{ field: 'rua', caption: 'Rua', size: '10%' },
 			{ field: 'numero', caption: 'Número', size: '10%' },
 			{ field: 'complemento', caption: 'Complemento', size: '10%' },
@@ -52,7 +73,8 @@ $(function(){
 		},
 		onDelete: function(event) {
 	        if (event.force) {
-	        	requestDelete();
+	        	var record = $.extend(true, {}, w2ui.form.record);
+	        	requestDelete(record);
 	        }
 	    }    
 	});
@@ -69,7 +91,7 @@ $(function(){
 			{ name: 'confirmarsenha', type: 'password', required: true, html: { caption: 'Confirme a senha', attr: 'size="40" maxlength="32"' } },
 			{ name: 'cpf', type: 'text', required: true, html: { caption: 'CPF', attr: 'size="40" maxlength="16"' } },
 			{ name: 'rg', type: 'text', required: true, html: { caption: 'RG', attr: 'size="40" maxlength="16"' } },
-//			{ name: 'cidade', type: 'list', required: true, html: { caption: 'Cidade' } },
+			{ name: 'cidade', type: 'list', required: true, options: { items: cidade }, html: { caption: 'Cidade', attr: 'size="40"' } },
 			{ name: 'rua', type: 'text', required: true, html: { caption: 'Rua', attr: 'size="40" maxlength="64"' } },
 			{ name: 'numero', type: 'int', required: true, options: { autoFormat: false }, html: { caption: 'Número', attr: 'size="40" maxlength="8"' } },
 			{ name: 'complemento', type: 'text', required: true, html: { caption: 'Complemento', attr: 'size="40" maxlength="32"' } },
@@ -94,12 +116,14 @@ $(function(){
 					});
 					return;
 				}
-				delete w2ui.form.record.recid;
-				delete w2ui.form.record.confirmarsenha;
-				if (w2ui.form.record.id == '') {
-					requestInsert();
+				var record = $.extend(true, {}, w2ui.form.record);
+				delete record.recid;
+				delete record.confirmarsenha;
+				delete record.cidade.text;
+				if (record.id === '') {
+					requestInsert(record);
 				} else {
-					requestUpdate();
+					requestUpdate(record);
 				}
 			}
 		}
@@ -178,10 +202,10 @@ $(function(){
 		});
 	}
 	
-	function requestInsert() {
+	function requestInsert(record) {
 		$.ajax({
 			type: 'POST',
-			data: JSON.stringify(w2ui.form.record),
+			data: JSON.stringify(record),
 			contentType: 'application/json',
 			dataType: 'json',
 			url: 'http://' + window.location.host + '/funcionarios',
@@ -205,10 +229,10 @@ $(function(){
 		});
 	}
 	
-	function requestUpdate() {
+	function requestUpdate(record) {
 		$.ajax({
 			type: 'PUT',
-			data: JSON.stringify(w2ui.form.record),
+			data: JSON.stringify(record),
 			contentType: 'application/json',
 			dataType: 'json',
 			url: 'http://' + window.location.host + '/funcionarios',
@@ -232,10 +256,10 @@ $(function(){
 		});
 	}
 	
-	function requestDelete() {
+	function requestDelete(record) {
 		$.ajax({
     		type: 'DELETE',
-    		url: 'http://' + window.location.host + '/funcionarios/' + w2ui.form.recid,
+    		url: 'http://' + window.location.host + '/funcionarios/' + record.id,
     		cache: false,
     					
     		success: function(data) {
@@ -255,29 +279,9 @@ $(function(){
     		}
     	});
 	}
-			
-//	var cidade = [];
-//	var request = $.ajax({
-//		type: 'GET',
-//		dataType: 'json',
-//		url: 'http://' + window.location.host + '/cidades',
-//		cache: false,
-//					
-//		success: function(data) {
-//			console.log('DATA: ' + data);
-//			cidade = data;
-//			for (i in cidade) {
-//				cidade[i].text = cidade[i].nome;
-//			}
-//			console.log(cidade);
-//			$('input[name=cidade]').w2field('list', { items: cidade });
-//		},
-//		error: function(jqXHR, textStatus) {
-//			console.log('ERROR: ' + textStatus);
-//		}					
-//	});
-	
+					
 	$("#cpf").mask("999.999.999-99", {autoclear: false});
+	$("#rg").mask("99.999.999-9", {autoclear: false});
 	$("#cep").mask("99.999-999", {autoclear: false});
     $("#celular").mask('(99)99999-9999', {autoclear: false});
 

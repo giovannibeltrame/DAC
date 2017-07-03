@@ -19,9 +19,9 @@ $(function(){
 		columns: [
 			{ field: 'id', caption: 'Cód.', size: '10%' },
 			{ field: 'nome', caption: 'Nome', size: '10%' },
-			{ field: 'percentualImposto', caption: '% Imposto', size: '10%', render: 'float:2' },
+			{ field: 'percentualImposto', caption: '% Imposto', size: '10%', render: 'percent' },
 			{ field: 'quantidadeMinimaHorasMes', caption: 'Qtde. Mínima Horas Mês', size: '10%' },
-			{ field: 'salario', caption: 'Salário', size: '10%', render: 'float:2' },
+			{ field: 'salario', caption: 'Salário', size: '10%', render: 'currency' },
 			{ field: 'gerente', caption: 'Gerente', size: '10%', render: function(record) { return record.gerente == 'S' ? 'Sim' : 'Não'; } },
 			{ field: 'situacao', caption: 'Situação', size: '10%', render: function(record) { return record.situacao == 'A' ? 'Ativa' : 'Inativa'; } }
 		],
@@ -39,6 +39,7 @@ $(function(){
                 	form.recid  = sel[0];
                     form.record = $.extend(true, {}, grid.get(sel[0]));
                     form.refresh();
+                    $("#salario").change();
                 } else {
                 	form.clear();
                 }
@@ -60,9 +61,9 @@ $(function(){
 		fields: [
 			{ name: 'id', type: 'text', html: { caption: 'Cód.', attr: 'size="40" readonly' } },
 			{ name: 'nome', type: 'text', required: true, html: { caption: 'Nome', attr: 'size="40" maxlength="255"' } },
-			{ name: 'percentualImposto', type: 'float', required: true, html: { caption: '% Imposto', attr: 'size="40" maxlength="8"' } },
+			{ name: 'percentualImposto', type: 'text', required: true, html: { caption: '% Imposto', attr: 'size="40" maxlength="32"' } },
 			{ name: 'quantidadeMinimaHorasMes', type: 'int', required: true, options: { autoFormat: false }, html: { caption: 'Qtde. Mínima Horas Mês', attr: 'size="40" maxlength="8"' } },
-			{ name: 'salario', type: 'currency', html: { caption: 'Salário', attr: 'size="40" maxlength="16"' } },
+			{ name: 'salario', type: 'text', html: { caption: 'Salário', attr: 'size="40" maxlength="32"' } },
 			{ name: 'gerente', type: 'list', required: true, html: { caption: 'Gerente' }, options: { items: gerente } },
 			{ name: 'situacao', type: 'list', required: true, html: { caption: 'Situação' }, options: { items: situacao } }
 		],

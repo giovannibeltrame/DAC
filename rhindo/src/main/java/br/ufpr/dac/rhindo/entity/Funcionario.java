@@ -45,7 +45,7 @@ public class Funcionario implements Serializable {
 	@Column(length=16)
 	private String rg;
 
-	@Column(length=32)
+	@Column(length=255)
 	private String senha;
 	
 	@Column(length=16)

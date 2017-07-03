@@ -277,11 +277,11 @@ $(function(){
     	});
 	}
 					
-	$("#cpf").mask("999.999.999-99", {autoclear: false});
-	$("#rg").mask("99.999.999-9", {autoclear: false});
-	$("#cep").mask("99.999-999", {autoclear: false});
-    $("#celular").mask('(99)99999-9999', {autoclear: false});
+	$('cpf').mask('999.999.999-99', {autoclear: false});
+	$('#rg').mask('99.999.999-9', {autoclear: false});
+	$('#cep').mask('99.999-999', {autoclear: false});
+    $('#celular').mask('(99)99999-9999', {autoclear: false});
 
-	$(".w2ui-form-box").css('width', '100%');
-	$(".w2ui-field").css('display', 'inline-block');
+	$('.w2ui-form-box').css('width', '100%');
+	$('.w2ui-field').css('display', 'inline-block');
 });

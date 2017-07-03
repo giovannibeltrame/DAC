@@ -19,7 +19,7 @@ $(function(){
 		columns: [
 			{ field: 'id', caption: 'Cód.', size: '10%' },
 			{ field: 'nome', caption: 'Nome', size: '10%' },
-			{ field: 'percentualImposto', caption: '% Imposto', size: '10%', render: 'percent' },
+			{ field: 'percentualImposto', caption: '% Imposto', size: '10%', render: function(record) { return record.percentualImposto.toString().replace('.',',') + '%'; } },
 			{ field: 'quantidadeMinimaHorasMes', caption: 'Qtde. Mínima Horas Mês', size: '10%' },
 			{ field: 'salario', caption: 'Salário', size: '10%', render: 'currency' },
 			{ field: 'gerente', caption: 'Gerente', size: '10%', render: function(record) { return record.gerente == 'S' ? 'Sim' : 'Não'; } },
@@ -61,11 +61,11 @@ $(function(){
 		fields: [
 			{ name: 'id', type: 'text', html: { caption: 'Cód.', attr: 'size="40" readonly' } },
 			{ name: 'nome', type: 'text', required: true, html: { caption: 'Nome', attr: 'size="40" maxlength="255"' } },
-			{ name: 'percentualImposto', type: 'text', required: true, html: { caption: '% Imposto', attr: 'size="40" maxlength="32"' } },
+			{ name: 'percentualImposto', type: 'percent', required: true, options: { precision: 0 }, html: { caption: '% Imposto', attr: 'size="40" maxlength="32"' } },
 			{ name: 'quantidadeMinimaHorasMes', type: 'int', required: true, options: { autoFormat: false }, html: { caption: 'Qtde. Mínima Horas Mês', attr: 'size="40" maxlength="8"' } },
-			{ name: 'salario', type: 'text', html: { caption: 'Salário', attr: 'size="40" maxlength="32"' } },
-			{ name: 'gerente', type: 'list', required: true, options: { items: gerente }, html: { caption: 'Gerente' } },
-			{ name: 'situacao', type: 'list', required: true, options: { items: situacao }, html: { caption: 'Situação' } }
+			{ name: 'salario', type: 'currency', required: true, html: { caption: 'Salário', attr: 'size="40" maxlength="32"' } },
+			{ name: 'gerente', type: 'list', required: true, options: { items: gerente }, html: { caption: 'Gerente', attr: 'size="40"' } },
+			{ name: 'situacao', type: 'list', required: true, options: { items: situacao }, html: { caption: 'Situação', attr: 'size="40"' } }
 		],
 		actions: {
 			Reset: function () {
@@ -190,13 +190,6 @@ $(function(){
     	});
 	}
 	
-	$("#salario").maskMoney({
-		symbol: 'R$ ',
-		showSymbol: true,
-		symbolStay: true,
-		thousands: '.',
-		decimal: ','
-	});
-	
-	$(".w2ui-form-box").css('width', '100%');	
+	$('.w2ui-field').css('display', 'inline-block');
+	$('.w2ui-form-box').css('width', '100%');	
 });

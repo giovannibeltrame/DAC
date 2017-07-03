@@ -37,6 +37,10 @@ public class CargoService {
 	}
 	
 	public void delete(Long id) throws Exception {
-		this.cargoRepository.delete(id);
+		Cargo c = this.cargoRepository.findOne(id);
+		if (c == null) {
+			throw new ResourceNotFoundException();
+		}
+		this.cargoRepository.delete(c);
 	}
 }

@@ -181,7 +181,7 @@ $(function(){
     	});
 	}
 	
-	$(".w2ui-form-box").css('width', '100%');
-	$(".w2ui-field").css('display', 'inline-block');
+	$('.w2ui-form-box').css('width', '100%');
+	$('.w2ui-field').css('display', 'inline-block');
 	
 });

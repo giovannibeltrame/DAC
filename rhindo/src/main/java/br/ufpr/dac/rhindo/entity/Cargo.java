@@ -35,7 +35,7 @@ public class Cargo implements Serializable {
 	@Column(length=255)
 	private String nome;
 
-	@Column(name="percentualimposto", precision=4, scale=4)
+	@Column(name="percentualimposto", precision=8, scale=2)
 	private BigDecimal percentualImposto;
 
 	@Column(name="quantidademinimahorasmes")

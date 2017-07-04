@@ -27,31 +27,27 @@ public class CargoController {
 
 	@GetMapping("/cargos")
 	public ResponseEntity get() throws Exception {
-		List<Cargo> list = null;
-		list = this.cargoService.findAll();
+		List<Cargo> list = this.cargoService.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 
 	@GetMapping("/cargo/{id}")
 	public ResponseEntity get(@PathVariable Long id) throws Exception {
-		Cargo c = null;
-			c = this.cargoService.findOne(id);
+		Cargo c = this.cargoService.findOne(id);
 		return ResponseEntity.status(HttpStatus.OK).body(c);
 	}
 
 	@PostMapping("/cargos")
 	public ResponseEntity post(@RequestBody String body) throws Exception {
-		Cargo c = null;
-		c = new ObjectMapper().readValue(body, Cargo.class);
-		c = this.cargoService.save(c);
+		Cargo c = new ObjectMapper().readValue(body, Cargo.class);
+		c = this.cargoService.insert(c);
 		return ResponseEntity.status(HttpStatus.OK).body(c);
 	}
 
 	@PutMapping("/cargos")
 	public ResponseEntity put(@RequestBody String body) throws Exception {
-		Cargo c = null;
-		c = new ObjectMapper().readValue(body, Cargo.class);
-		c = this.cargoService.save(c);
+		Cargo c = new ObjectMapper().readValue(body, Cargo.class);
+		c = this.cargoService.update(c);
 		return ResponseEntity.status(HttpStatus.OK).body(c);
 	}
 

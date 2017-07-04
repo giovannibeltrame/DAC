@@ -17,9 +17,6 @@ public class DepartamentoService {
 
 	public List<Departamento> findAll() throws Exception {
 		List<Departamento> list = this.departamentoRepository.findAll();
-		if (list == null || list.isEmpty()) {
-			throw new ResourceNotFoundException();
-		}
 		return list; 
 	}
 

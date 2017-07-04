@@ -1,4 +1,4 @@
-package br.ufpr.dac.rhindo.exception;
+package br.ufpr.dac.atoa.exception;
 
 import java.io.IOException;
 
@@ -36,7 +36,7 @@ public class ExceptionHandlerAdvice {
 	public ResponseEntity handleIntegrationException(Exception e) {
 		log.error(e);
 		return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
-				.body("Ocorreu um erro na integração com o sistema de atividades (AT-OA).");
+				.body("Ocorreu um erro na integração com o sistema de recursos humanos (RH-INDO).");
 	}
 
 	@ExceptionHandler(Exception.class)

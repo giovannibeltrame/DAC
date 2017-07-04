@@ -22,6 +22,7 @@ import br.ufpr.dac.rhindo.entity.Departamento;
 import br.ufpr.dac.rhindo.exception.ResourceNotFoundException;
 import br.ufpr.dac.rhindo.service.DepartamentoService;
 
+@SuppressWarnings("rawtypes")
 @RestController
 public class DepartamentoController {
 
@@ -29,77 +30,39 @@ public class DepartamentoController {
 	private DepartamentoService departamentoService;
 
 	@GetMapping("/departamentos")
-	public ResponseEntity<List<Departamento>> get() {
+	public ResponseEntity get() throws Exception {
 		List<Departamento> list = null;
-		try {
-			list = this.departamentoService.findAll();
-		} catch (ResourceNotFoundException e) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<List<Departamento>>(list, HttpStatus.OK);
+		list = this.departamentoService.findAll();
+		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 
 	@GetMapping("/departamentos/{id}")
-	public ResponseEntity<Departamento> get(@PathVariable Long id) {
+	public ResponseEntity get(@PathVariable Long id) throws Exception {
 		Departamento d = null;
-		try {
-			d = this.departamentoService.findOne(id);
-		} catch (ResourceNotFoundException e) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<Departamento>(d, HttpStatus.OK);
+		d = this.departamentoService.findOne(id);
+		return ResponseEntity.status(HttpStatus.OK).body(d);
 	}
-	
+
 	@PostMapping("/departamentos")
-	public ResponseEntity<Departamento> post(@RequestBody String body) {
+	public ResponseEntity post(@RequestBody String body) throws Exception {
 		Departamento d = null;
-		try {
-			d = new ObjectMapper().readValue(body, Departamento.class);
-			d = this.departamentoService.save(d);
-		} catch (JsonParseException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (JsonMappingException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (IOException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<Departamento>(d, HttpStatus.OK);
+		d = new ObjectMapper().readValue(body, Departamento.class);
+		d = this.departamentoService.insert(d);
+		return ResponseEntity.status(HttpStatus.OK).body(d);
 	}
-	
+
 	@PutMapping("/departamentos")
-	public ResponseEntity<Departamento> put(@RequestBody String body) {
+	public ResponseEntity put(@RequestBody String body) throws Exception {
 		Departamento d = null;
-		try {
-			d = new ObjectMapper().readValue(body, Departamento.class);
-			d = this.departamentoService.save(d);
-		} catch (JsonParseException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (JsonMappingException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (IOException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<Departamento>(d, HttpStatus.OK);
+		d = new ObjectMapper().readValue(body, Departamento.class);
+		d = this.departamentoService.update(d);
+		return ResponseEntity.status(HttpStatus.OK).body(d);
 	}
-	
+
 	@DeleteMapping("/departamentos/{id}")
-	public ResponseEntity delete(@PathVariable Long id) {
-		try {
-			this.departamentoService.delete(id);
-		} catch (ResourceNotFoundException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity delete(@PathVariable Long id) throws Exception {
+		this.departamentoService.delete(id);
+		return ResponseEntity.status(HttpStatus.OK).body("");
 	}
 
 }

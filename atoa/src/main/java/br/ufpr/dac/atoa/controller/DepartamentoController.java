@@ -1,6 +1,5 @@
 package br.ufpr.dac.atoa.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +13,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.ufpr.dac.atoa.entity.Departamento;
-import br.ufpr.dac.atoa.exception.ResourceNotFoundException;
 import br.ufpr.dac.atoa.service.DepartamentoService;
 
+@SuppressWarnings("rawtypes")
 @RestController
 public class DepartamentoController {
 
@@ -29,77 +26,35 @@ public class DepartamentoController {
 	private DepartamentoService departamentoService;
 
 	@GetMapping("/departamentos")
-	public ResponseEntity<List<Departamento>> get() {
-		List<Departamento> list = null;
-		try {
-			list = this.departamentoService.findAll();
-		} catch (ResourceNotFoundException e) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<List<Departamento>>(list, HttpStatus.OK);
+	public ResponseEntity get() throws Exception {
+		List<Departamento> list = this.departamentoService.findAll();
+		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 
 	@GetMapping("/departamentos/{id}")
-	public ResponseEntity<Departamento> get(@PathVariable Long id) {
-		Departamento d = null;
-		try {
-			d = this.departamentoService.findOne(id);
-		} catch (ResourceNotFoundException e) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<Departamento>(d, HttpStatus.OK);
+	public ResponseEntity get(@PathVariable Long id) throws Exception {
+		Departamento d = this.departamentoService.findOne(id);
+		return ResponseEntity.status(HttpStatus.OK).body(d);
 	}
-	
+
 	@PostMapping("/departamentos")
-	public ResponseEntity<Departamento> post(@RequestBody String body) {
-		Departamento d = null;
-		try {
-			d = new ObjectMapper().readValue(body, Departamento.class);
-			d = this.departamentoService.save(d);
-		} catch (JsonParseException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (JsonMappingException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (IOException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<Departamento>(d, HttpStatus.OK);
+	public ResponseEntity post(@RequestBody String body) throws Exception {
+		Departamento d = new ObjectMapper().readValue(body, Departamento.class);
+		d = this.departamentoService.save(d);
+		return ResponseEntity.status(HttpStatus.OK).body(d);
 	}
-	
+
 	@PutMapping("/departamentos")
-	public ResponseEntity<Departamento> put(@RequestBody String body) {
-		Departamento d = null;
-		try {
-			d = new ObjectMapper().readValue(body, Departamento.class);
-			d = this.departamentoService.save(d);
-		} catch (JsonParseException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (JsonMappingException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (IOException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<Departamento>(d, HttpStatus.OK);
+	public ResponseEntity put(@RequestBody String body) throws Exception {
+		Departamento d = new ObjectMapper().readValue(body, Departamento.class);
+		d = this.departamentoService.save(d);
+		return ResponseEntity.status(HttpStatus.OK).body(d);
 	}
-	
+
 	@DeleteMapping("/departamentos/{id}")
-	public ResponseEntity delete(@PathVariable Long id) {
-		try {
-			this.departamentoService.delete(id);
-		} catch (ResourceNotFoundException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity delete(@PathVariable Long id) throws Exception {
+		this.departamentoService.delete(id);
+		return ResponseEntity.status(HttpStatus.OK).body("");
 	}
 
 }

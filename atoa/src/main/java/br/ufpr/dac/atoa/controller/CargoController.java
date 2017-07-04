@@ -1,6 +1,5 @@
 package br.ufpr.dac.atoa.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +13,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.ufpr.dac.atoa.entity.Cargo;
-import br.ufpr.dac.atoa.exception.ResourceNotFoundException;
 import br.ufpr.dac.atoa.service.CargoService;
 
+@SuppressWarnings("rawtypes")
 @RestController
 public class CargoController {
 
@@ -29,77 +26,35 @@ public class CargoController {
 	private CargoService cargoService;
 
 	@GetMapping("/cargos")
-	public ResponseEntity<List<Cargo>> get() {
-		List<Cargo> list = null;
-		try {
-			list = this.cargoService.findAll();
-		} catch (ResourceNotFoundException e) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<List<Cargo>>(list, HttpStatus.OK);
+	public ResponseEntity get() throws Exception {
+		List<Cargo> list = this.cargoService.findAll();
+		return ResponseEntity.status(HttpStatus.OK).body((list));
 	}
 
 	@GetMapping("/cargo/{id}")
-	public ResponseEntity<Cargo> get(@PathVariable Long id) {
-		Cargo c = null;
-		try {
-			c = this.cargoService.findOne(id);
-		} catch (ResourceNotFoundException e) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<Cargo>(c, HttpStatus.OK);
+	public ResponseEntity get(@PathVariable Long id) throws Exception {
+		Cargo c = this.cargoService.findOne(id);
+		return ResponseEntity.status(HttpStatus.OK).body(c);
 	}
-	
+
 	@PostMapping("/cargos")
-	public ResponseEntity<Cargo> post(@RequestBody String body) {
-		Cargo c = null;
-		try {
-			c = new ObjectMapper().readValue(body, Cargo.class);
-			c = this.cargoService.save(c);
-		} catch (JsonParseException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (JsonMappingException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (IOException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<Cargo>(c, HttpStatus.OK);
+	public ResponseEntity post(@RequestBody String body) throws Exception {
+		Cargo c = new ObjectMapper().readValue(body, Cargo.class);
+		c = this.cargoService.save(c);
+		return ResponseEntity.status(HttpStatus.OK).body(c);
 	}
-	
+
 	@PutMapping("/cargos")
-	public ResponseEntity<Cargo> put(@RequestBody String body) {
-		Cargo c = null;
-		try {
-			c = new ObjectMapper().readValue(body, Cargo.class);
-			c = this.cargoService.save(c);
-		} catch (JsonParseException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (JsonMappingException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (IOException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<Cargo>(c, HttpStatus.OK);
+	public ResponseEntity put(@RequestBody String body) throws Exception {
+		Cargo c = new ObjectMapper().readValue(body, Cargo.class);
+		c = this.cargoService.save(c);
+		return ResponseEntity.status(HttpStatus.OK).body(c);
 	}
-	
+
 	@DeleteMapping("/cargos/{id}")
-	public ResponseEntity delete(@PathVariable Long id) {
-		try {
-			this.cargoService.delete(id);
-		} catch (ResourceNotFoundException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity delete(@PathVariable Long id) throws Exception {
+		this.cargoService.delete(id);
+		return ResponseEntity.status(HttpStatus.OK).body("");
 	}
 
 }

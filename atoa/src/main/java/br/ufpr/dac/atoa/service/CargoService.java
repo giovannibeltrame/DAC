@@ -11,23 +11,20 @@ import br.ufpr.dac.atoa.repository.CargoRepository;
 
 @Service
 public class CargoService {
-	
+
 	@Autowired
 	private CargoRepository cargoRepository;
 
 	public List<Cargo> findAll() throws Exception {
 		List<Cargo> list = this.cargoRepository.findAll();
-		if (list == null || list.isEmpty()) {
-			throw new ResourceNotFoundException();
-		}
-		return list; 
+		return list;
 	}
 
 	public Cargo findOne(Long id) throws Exception {
 		Cargo c = this.cargoRepository.findOne(id);
 		if (c == null) {
 			throw new ResourceNotFoundException();
-		}		
+		}
 		return c;
 	}
 
@@ -35,7 +32,7 @@ public class CargoService {
 		c = this.cargoRepository.saveAndFlush(c);
 		return c;
 	}
-	
+
 	public void delete(Long id) throws Exception {
 		this.cargoRepository.delete(id);
 	}

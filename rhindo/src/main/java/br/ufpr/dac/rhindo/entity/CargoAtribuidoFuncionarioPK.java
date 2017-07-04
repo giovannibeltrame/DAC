@@ -1,6 +1,8 @@
 package br.ufpr.dac.rhindo.entity;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 /**
@@ -9,45 +11,53 @@ import javax.persistence.*;
  */
 @Embeddable
 public class CargoAtribuidoFuncionarioPK implements Serializable {
-	//default serial version id, required for serializable classes.
+	// default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="idcargo", insertable=false, updatable=false, unique=true, nullable=false)
+	@Column(name = "idcargo", insertable = false, updatable = false, unique = true, nullable = false)
 	private Long idCargo;
 
-	@Column(name="iddepartamento", insertable=false, updatable=false, unique=true, nullable=false)
+	@Column(name = "iddepartamento", insertable = false, updatable = false, unique = true, nullable = false)
 	private Long idDepartamento;
 
-	@Column(name="idfuncionario", insertable=false, updatable=false, unique=true, nullable=false)
+	@Column(name = "idfuncionario", insertable = false, updatable = false, unique = true, nullable = false)
 	private Long idFuncionario;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="dataalocacao", insertable=false, updatable=false, unique=true, nullable=false)
-	private java.util.Date dataAlocacao;
+	@Column(name = "dataalocacao", insertable = false, updatable = false, unique = true, nullable = false)
+	private Date dataAlocacao;
 
 	public CargoAtribuidoFuncionarioPK() {
 	}
+
 	public Long getIdCargo() {
 		return this.idCargo;
 	}
+
 	public void setIdCargo(Long idCargo) {
 		this.idCargo = idCargo;
 	}
+
 	public Long getIdDepartamento() {
 		return this.idDepartamento;
 	}
+
 	public void setIdDepartamento(Long idDepartamento) {
 		this.idDepartamento = idDepartamento;
 	}
+
 	public Long getIdFuncionario() {
 		return this.idFuncionario;
 	}
+
 	public void setIdFuncionario(Long idFuncionario) {
 		this.idFuncionario = idFuncionario;
 	}
-	public java.util.Date getDataAlocacao() {
+
+	public Date getDataAlocacao() {
 		return this.dataAlocacao;
 	}
+
 	public void setDataAlocacao(java.util.Date dataAlocacao) {
 		this.dataAlocacao = dataAlocacao;
 	}
@@ -59,12 +69,10 @@ public class CargoAtribuidoFuncionarioPK implements Serializable {
 		if (!(other instanceof CargoAtribuidoFuncionarioPK)) {
 			return false;
 		}
-		CargoAtribuidoFuncionarioPK castOther = (CargoAtribuidoFuncionarioPK)other;
-		return 
-			this.idCargo.equals(castOther.idCargo)
-			&& this.idDepartamento.equals(castOther.idDepartamento)
-			&& this.idFuncionario.equals(castOther.idFuncionario)
-			&& this.dataAlocacao.equals(castOther.dataAlocacao);
+		CargoAtribuidoFuncionarioPK castOther = (CargoAtribuidoFuncionarioPK) other;
+		return this.idCargo.equals(castOther.idCargo) && this.idDepartamento.equals(castOther.idDepartamento)
+				&& this.idFuncionario.equals(castOther.idFuncionario)
+				&& this.dataAlocacao.equals(castOther.dataAlocacao);
 	}
 
 	public int hashCode() {
@@ -74,7 +82,7 @@ public class CargoAtribuidoFuncionarioPK implements Serializable {
 		hash = hash * prime + this.idDepartamento.hashCode();
 		hash = hash * prime + this.idFuncionario.hashCode();
 		hash = hash * prime + this.dataAlocacao.hashCode();
-		
+
 		return hash;
 	}
 }

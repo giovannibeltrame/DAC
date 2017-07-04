@@ -25,9 +25,16 @@ public class ExceptionHandlerAdvice {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 				.body("O recurso informado na requisição não foi encontrado.");
 	}
+	
+	@ExceptionHandler(BusinessException.class)
+	public ResponseEntity handleBusinessException(BusinessException e) {
+		log.error(e);
+		return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+				.body(e.getMessage());
+	}
 
 	@ExceptionHandler({ JsonParseException.class, JsonMappingException.class, IOException.class })
-	public ResponseEntity handleExceptionParse(Exception e) {
+	public ResponseEntity handleParseException(Exception e) {
 		log.error(e);
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Parâmetros inválidos.");
 	}

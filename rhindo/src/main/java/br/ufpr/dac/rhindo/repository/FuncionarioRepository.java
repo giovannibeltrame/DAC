@@ -13,5 +13,9 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> 
 	
 	@Query("select new Funcionario(f.id, f.celular, f.cpf, f.email, f.nome, f.rg, '', f.cep, f.bairro, f.rua, f.numero, f.complemento, f.cidade) from Funcionario f")
 	public List<Funcionario> find();
+	
+	public Funcionario findByCpf(String cpf);
+	
+	public Funcionario findByRg(String rg);
 
 }

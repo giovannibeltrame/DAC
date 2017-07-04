@@ -5,14 +5,13 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The persistent class for the departamentoalocafuncionario database table.
  * 
  */
 @Entity
-@Table(name="departamentoalocafuncionario")
-@NamedQuery(name="DepartamentoAlocaFuncionario.findAll", query="SELECT d FROM DepartamentoAlocaFuncionario d")
+@Table(name = "departamentoalocafuncionario")
+@NamedQuery(name = "DepartamentoAlocaFuncionario.findAll", query = "SELECT d FROM DepartamentoAlocaFuncionario d")
 public class DepartamentoAlocaFuncionario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -20,21 +19,21 @@ public class DepartamentoAlocaFuncionario implements Serializable {
 	private DepartamentoAlocaFuncionarioPK id;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="datadesalocacao")
+	@Column(name = "datadesalocacao")
 	private Date dataDesalocacao;
 
-	//bi-directional many-to-one association to CargoAtribuidoFuncionario
-	@OneToMany(mappedBy="departamentoAlocaFuncionario")
+	// bi-directional many-to-one association to CargoAtribuidoFuncionario
+	@OneToMany(mappedBy = "departamentoAlocaFuncionario")
 	private List<CargoAtribuidoFuncionario> cargoAtribuidoFuncionarios;
 
-	//bi-directional many-to-one association to Departamento
+	// bi-directional many-to-one association to Departamento
 	@ManyToOne
-	@JoinColumn(name="iddepartamento", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name = "iddepartamento", nullable = false, insertable = false, updatable = false)
 	private Departamento departamento;
 
-	//bi-directional many-to-one association to Funcionario
+	// bi-directional many-to-one association to Funcionario
 	@ManyToOne
-	@JoinColumn(name="idfuncionario", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name = "idfuncionario", nullable = false, insertable = false, updatable = false)
 	private Funcionario funcionario;
 
 	public DepartamentoAlocaFuncionario() {
@@ -71,7 +70,8 @@ public class DepartamentoAlocaFuncionario implements Serializable {
 		return cargoAtribuidoFuncionario;
 	}
 
-	public CargoAtribuidoFuncionario removeCargoatribuidofuncionario(CargoAtribuidoFuncionario cargoAtribuidoFuncionario) {
+	public CargoAtribuidoFuncionario removeCargoatribuidofuncionario(
+			CargoAtribuidoFuncionario cargoAtribuidoFuncionario) {
 		getCargoAtribuidoFuncionarios().remove(cargoAtribuidoFuncionario);
 		cargoAtribuidoFuncionario.setDepartamentoAlocaFuncionario(null);
 

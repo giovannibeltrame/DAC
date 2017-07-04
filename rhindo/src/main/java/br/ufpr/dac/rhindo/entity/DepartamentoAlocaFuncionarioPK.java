@@ -1,6 +1,8 @@
 package br.ufpr.dac.rhindo.entity;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 /**
@@ -9,36 +11,42 @@ import javax.persistence.*;
  */
 @Embeddable
 public class DepartamentoAlocaFuncionarioPK implements Serializable {
-	//default serial version id, required for serializable classes.
+	// default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(insertable=false, updatable=false, unique=true, nullable=false)
-	private Long iddepartamento;
+	@Column(name = "iddepartamento", insertable = false, updatable = false, unique = true, nullable = false)
+	private Long idDepartamento;
 
-	@Column(insertable=false, updatable=false, unique=true, nullable=false)
-	private Long idfuncionario;
+	@Column(name = "idfuncionario", insertable = false, updatable = false, unique = true, nullable = false)
+	private Long idFuncionario;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="dataalocacao", unique=true, nullable=false)
-	private java.util.Date dataAlocacao;
+	@Column(name = "dataalocacao", unique = true, nullable = false)
+	private Date dataAlocacao;
 
 	public DepartamentoAlocaFuncionarioPK() {
 	}
-	public Long getIddepartamento() {
-		return this.iddepartamento;
+
+	public Long getIdDepartamento() {
+		return this.idDepartamento;
 	}
-	public void setIddepartamento(Long iddepartamento) {
-		this.iddepartamento = iddepartamento;
+
+	public void setIdDepartamento(Long idDepartamento) {
+		this.idDepartamento = idDepartamento;
 	}
-	public Long getIdfuncionario() {
-		return this.idfuncionario;
+
+	public Long getIdFuncionario() {
+		return this.idFuncionario;
 	}
-	public void setIdfuncionario(Long idfuncionario) {
-		this.idfuncionario = idfuncionario;
+
+	public void setIdFuncionario(Long idFuncionario) {
+		this.idFuncionario = idFuncionario;
 	}
-	public java.util.Date getDataAlocacao() {
+
+	public Date getDataAlocacao() {
 		return this.dataAlocacao;
 	}
+
 	public void setDataAlocacao(java.util.Date dataAlocacao) {
 		this.dataAlocacao = dataAlocacao;
 	}
@@ -50,20 +58,19 @@ public class DepartamentoAlocaFuncionarioPK implements Serializable {
 		if (!(other instanceof DepartamentoAlocaFuncionarioPK)) {
 			return false;
 		}
-		DepartamentoAlocaFuncionarioPK castOther = (DepartamentoAlocaFuncionarioPK)other;
-		return 
-			this.iddepartamento.equals(castOther.iddepartamento)
-			&& this.idfuncionario.equals(castOther.idfuncionario)
-			&& this.dataAlocacao.equals(castOther.dataAlocacao);
+		DepartamentoAlocaFuncionarioPK castOther = (DepartamentoAlocaFuncionarioPK) other;
+		return this.idFuncionario.equals(castOther.idDepartamento)
+				&& this.idFuncionario.equals(castOther.idFuncionario)
+				&& this.dataAlocacao.equals(castOther.dataAlocacao);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
-		hash = hash * prime + this.iddepartamento.hashCode();
-		hash = hash * prime + this.idfuncionario.hashCode();
+		hash = hash * prime + this.idDepartamento.hashCode();
+		hash = hash * prime + this.idFuncionario.hashCode();
 		hash = hash * prime + this.dataAlocacao.hashCode();
-		
+
 		return hash;
 	}
 }

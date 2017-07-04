@@ -4,34 +4,31 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the departamento database table.
  * 
  */
 @Entity
-@Table(name="departamento")
-@NamedQuery(name="Departamento.findAll", query="SELECT d FROM Departamento d")
+@Table(name = "departamento")
+@NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d")
 public class Departamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="seq_departamento", sequenceName="seq_departamento", allocationSize=1, initialValue=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_departamento")
-	@Column(name="iddepartamento", unique=true, nullable=false)
+	@Column(name = "iddepartamento", unique = true, nullable = false)
 	private Long id;
 
-	@Column(length=255)
+	@Column(length = 255)
 	private String localizacao;
 
-	@Column(length=255)
+	@Column(length = 255)
 	private String nome;
 
-	@Column(length=1)
+	@Column(length = 1)
 	private String situacao;
 
-	//bi-directional many-to-one association to DepartamentoAlocaFuncionario
-	@OneToMany(mappedBy="departamento")
+	// bi-directional many-to-one association to DepartamentoAlocaFuncionario
+	@OneToMany(mappedBy = "departamento")
 	private List<DepartamentoAlocaFuncionario> departamentoAlocaFuncionarios;
 
 	public Departamento() {
@@ -77,14 +74,16 @@ public class Departamento implements Serializable {
 		this.departamentoAlocaFuncionarios = departamentoAlocaFuncionarios;
 	}
 
-	public DepartamentoAlocaFuncionario addDepartamentoalocafuncionario(DepartamentoAlocaFuncionario departamentoAlocaFuncionario) {
+	public DepartamentoAlocaFuncionario addDepartamentoalocafuncionario(
+			DepartamentoAlocaFuncionario departamentoAlocaFuncionario) {
 		getDepartamentoAlocaFuncionarios().add(departamentoAlocaFuncionario);
 		departamentoAlocaFuncionario.setDepartamento(this);
 
 		return departamentoAlocaFuncionario;
 	}
 
-	public DepartamentoAlocaFuncionario removeDepartamentoalocafuncionario(DepartamentoAlocaFuncionario departamentoAlocaFuncionario) {
+	public DepartamentoAlocaFuncionario removeDepartamentoalocafuncionario(
+			DepartamentoAlocaFuncionario departamentoAlocaFuncionario) {
 		getDepartamentoAlocaFuncionarios().remove(departamentoAlocaFuncionario);
 		departamentoAlocaFuncionario.setDepartamento(null);
 

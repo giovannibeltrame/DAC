@@ -17,9 +17,6 @@ public class FuncionarioService {
 
 	public List<Funcionario> findAll() throws Exception {
 		List<Funcionario> list = this.funcionarioRepository.find();
-		if (list == null || list.isEmpty()) {
-			throw new ResourceNotFoundException();
-		}
 		return list; 
 	}
 

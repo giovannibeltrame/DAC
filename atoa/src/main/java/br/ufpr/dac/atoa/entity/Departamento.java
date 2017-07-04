@@ -4,41 +4,48 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * The persistent class for the departamento database table.
  * 
  */
 @Entity
-@Table(name="departamento")
-@NamedQuery(name="Departamento.findAll", query="SELECT d FROM Departamento d")
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Table(name = "departamento")
+@NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d")
 public class Departamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="iddepartamento", unique=true, nullable=false)
+	@SequenceGenerator(name = "seq_departamento", sequenceName = "seq_departamento", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_departamento")
+	@Column(name = "iddepartamento", unique = true, nullable = false)
 	private Long id;
 
-	@Column(length=255)
+	@Column(length = 255)
 	private String localizacao;
 
-	@Column(length=255)
+	@Column(length = 255)
 	private String nome;
 
-	@Column(length=1)
+	@Column(length = 1)
 	private String situacao;
 
-//	//bi-directional many-to-one association to Funcionario
-//	@OneToMany(mappedBy="departamento")
-//	private List<Funcionario> funcionarios;
-//
-//	//bi-directional many-to-one association to TipoAtividade
-//	@OneToMany(mappedBy="departamento")
-//	private List<TipoAtividade> tipoatividades;
+	// //bi-directional many-to-one association to Funcionario
+	// @OneToMany(mappedBy="departamento")
+	// private List<Funcionario> funcionarios;
+	//
+	// //bi-directional many-to-one association to TipoAtividade
+	// @OneToMany(mappedBy="departamento")
+	// private List<TipoAtividade> tipoatividades;
 
 	public Departamento() {
 	}
@@ -75,48 +82,48 @@ public class Departamento implements Serializable {
 		this.situacao = situacao;
 	}
 
-//	public List<Funcionario> getFuncionarios() {
-//		return this.funcionarios;
-//	}
-//
-//	public void setFuncionarios(List<Funcionario> funcionarios) {
-//		this.funcionarios = funcionarios;
-//	}
-//
-//	public Funcionario addFuncionario(Funcionario funcionario) {
-//		getFuncionarios().add(funcionario);
-//		funcionario.setDepartamento(this);
-//
-//		return funcionario;
-//	}
-//
-//	public Funcionario removeFuncionario(Funcionario funcionario) {
-//		getFuncionarios().remove(funcionario);
-//		funcionario.setDepartamento(null);
-//
-//		return funcionario;
-//	}
-//
-//	public List<TipoAtividade> getTipoatividades() {
-//		return this.tipoatividades;
-//	}
-//
-//	public void setTipoatividades(List<TipoAtividade> tipoatividades) {
-//		this.tipoatividades = tipoatividades;
-//	}
-//
-//	public TipoAtividade addTipoatividade(TipoAtividade tipoatividade) {
-//		getTipoatividades().add(tipoatividade);
-//		tipoatividade.setDepartamento(this);
-//
-//		return tipoatividade;
-//	}
-//
-//	public TipoAtividade removeTipoatividade(TipoAtividade tipoatividade) {
-//		getTipoatividades().remove(tipoatividade);
-//		tipoatividade.setDepartamento(null);
-//
-//		return tipoatividade;
-//	}
+	// public List<Funcionario> getFuncionarios() {
+	// return this.funcionarios;
+	// }
+	//
+	// public void setFuncionarios(List<Funcionario> funcionarios) {
+	// this.funcionarios = funcionarios;
+	// }
+	//
+	// public Funcionario addFuncionario(Funcionario funcionario) {
+	// getFuncionarios().add(funcionario);
+	// funcionario.setDepartamento(this);
+	//
+	// return funcionario;
+	// }
+	//
+	// public Funcionario removeFuncionario(Funcionario funcionario) {
+	// getFuncionarios().remove(funcionario);
+	// funcionario.setDepartamento(null);
+	//
+	// return funcionario;
+	// }
+	//
+	// public List<TipoAtividade> getTipoatividades() {
+	// return this.tipoatividades;
+	// }
+	//
+	// public void setTipoatividades(List<TipoAtividade> tipoatividades) {
+	// this.tipoatividades = tipoatividades;
+	// }
+	//
+	// public TipoAtividade addTipoatividade(TipoAtividade tipoatividade) {
+	// getTipoatividades().add(tipoatividade);
+	// tipoatividade.setDepartamento(this);
+	//
+	// return tipoatividade;
+	// }
+	//
+	// public TipoAtividade removeTipoatividade(TipoAtividade tipoatividade) {
+	// getTipoatividades().remove(tipoatividade);
+	// tipoatividade.setDepartamento(null);
+	//
+	// return tipoatividade;
+	// }
 
 }

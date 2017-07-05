@@ -1,8 +1,12 @@
 package br.ufpr.dac.rhindo.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the departamento database table.
@@ -27,9 +31,9 @@ public class Departamento implements Serializable {
 	@Column(length = 1)
 	private String situacao;
 
-	// bi-directional many-to-one association to DepartamentoAlocaFuncionario
-	@OneToMany(mappedBy = "departamento")
-	private List<DepartamentoAlocaFuncionario> departamentoAlocaFuncionarios;
+	// // bi-directional many-to-one association to DepartamentoAlocaFuncionario
+	// @OneToMany(mappedBy = "departamento")
+	// private List<DepartamentoAlocaFuncionario> departamentoAlocaFuncionarios;
 
 	public Departamento() {
 	}
@@ -66,28 +70,31 @@ public class Departamento implements Serializable {
 		this.situacao = situacao;
 	}
 
-	public List<DepartamentoAlocaFuncionario> getDepartamentoAlocaFuncionarios() {
-		return this.departamentoAlocaFuncionarios;
-	}
-
-	public void setDepartamentoAlocaFuncionarios(List<DepartamentoAlocaFuncionario> departamentoAlocaFuncionarios) {
-		this.departamentoAlocaFuncionarios = departamentoAlocaFuncionarios;
-	}
-
-	public DepartamentoAlocaFuncionario addDepartamentoalocafuncionario(
-			DepartamentoAlocaFuncionario departamentoAlocaFuncionario) {
-		getDepartamentoAlocaFuncionarios().add(departamentoAlocaFuncionario);
-		departamentoAlocaFuncionario.setDepartamento(this);
-
-		return departamentoAlocaFuncionario;
-	}
-
-	public DepartamentoAlocaFuncionario removeDepartamentoalocafuncionario(
-			DepartamentoAlocaFuncionario departamentoAlocaFuncionario) {
-		getDepartamentoAlocaFuncionarios().remove(departamentoAlocaFuncionario);
-		departamentoAlocaFuncionario.setDepartamento(null);
-
-		return departamentoAlocaFuncionario;
-	}
+	// public List<DepartamentoAlocaFuncionario>
+	// getDepartamentoAlocaFuncionarios() {
+	// return this.departamentoAlocaFuncionarios;
+	// }
+	//
+	// public void
+	// setDepartamentoAlocaFuncionarios(List<DepartamentoAlocaFuncionario>
+	// departamentoAlocaFuncionarios) {
+	// this.departamentoAlocaFuncionarios = departamentoAlocaFuncionarios;
+	// }
+	//
+	// public DepartamentoAlocaFuncionario addDepartamentoalocafuncionario(
+	// DepartamentoAlocaFuncionario departamentoAlocaFuncionario) {
+	// getDepartamentoAlocaFuncionarios().add(departamentoAlocaFuncionario);
+	// departamentoAlocaFuncionario.setDepartamento(this);
+	//
+	// return departamentoAlocaFuncionario;
+	// }
+	//
+	// public DepartamentoAlocaFuncionario removeDepartamentoalocafuncionario(
+	// DepartamentoAlocaFuncionario departamentoAlocaFuncionario) {
+	// getDepartamentoAlocaFuncionarios().remove(departamentoAlocaFuncionario);
+	// departamentoAlocaFuncionario.setDepartamento(null);
+	//
+	// return departamentoAlocaFuncionario;
+	// }
 
 }

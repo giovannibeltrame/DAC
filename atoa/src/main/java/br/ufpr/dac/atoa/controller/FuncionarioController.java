@@ -1,6 +1,8 @@
 package br.ufpr.dac.atoa.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,6 +51,13 @@ public class FuncionarioController {
 		Funcionario f = new ObjectMapper().readValue(body, Funcionario.class);
 		f = this.funcionarioService.save(f);
 		return ResponseEntity.status(HttpStatus.OK).body(f);
+	}
+	
+	@PutMapping("/funcionarios/departamento")
+	public ResponseEntity putDepartamento(@RequestBody String body) throws Exception {
+		Map<String, String> map = new ObjectMapper().readValue(body, HashMap.class);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(map.get("iddepartamento"));
 	}
 
 	@DeleteMapping("/funcionarios/{id}")

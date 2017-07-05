@@ -14,18 +14,22 @@ public class CargoAtribuidoFuncionarioPK implements Serializable {
 	// default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "idcargo", insertable = false, updatable = false, unique = true, nullable = false)
+	@Column(name = "idcargo", insertable = false, updatable = false, nullable = false)
 	private Long idCargo;
 
-	@Column(name = "iddepartamento", insertable = false, updatable = false, unique = true, nullable = false)
+	@Column(name = "iddepartamento", insertable = false, updatable = false, nullable = false)
 	private Long idDepartamento;
 
-	@Column(name = "idfuncionario", insertable = false, updatable = false, unique = true, nullable = false)
+	@Column(name = "idfuncionario", insertable = false, updatable = false, nullable = false)
 	private Long idFuncionario;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dataalocacao", insertable = false, updatable = false, unique = true, nullable = false)
+	@Column(name = "dataalocacao", insertable = false, updatable = false, nullable = false)
 	private Date dataAlocacao;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "dataatribuicao", nullable = false)
+	private Date dataAtribuicao;
 
 	public CargoAtribuidoFuncionarioPK() {
 	}
@@ -53,13 +57,21 @@ public class CargoAtribuidoFuncionarioPK implements Serializable {
 	public void setIdFuncionario(Long idFuncionario) {
 		this.idFuncionario = idFuncionario;
 	}
-
-	public Date getDataAlocacao() {
-		return this.dataAlocacao;
+	
+	public Date getDataAtribuicao() {
+		return this.dataAtribuicao;
 	}
 
-	public void setDataAlocacao(java.util.Date dataAlocacao) {
-		this.dataAlocacao = dataAlocacao;
+	public void setDataAtribuicao(Date dataAtribuicao) {
+		this.dataAtribuicao = dataAtribuicao;
+	}
+
+	public Date getDataAlocacao() {
+		return this.dataAtribuicao;
+	}
+
+	public void setDataAlocacao(Date dataAtribuicao) {
+		this.dataAtribuicao = dataAtribuicao;
 	}
 
 	public boolean equals(Object other) {

@@ -14,14 +14,14 @@ public class DepartamentoAlocaFuncionarioPK implements Serializable {
 	// default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "iddepartamento", insertable = false, updatable = false, unique = true, nullable = false)
+	@Column(name = "iddepartamento", insertable = false, updatable = false, nullable = false)
 	private Long idDepartamento;
 
-	@Column(name = "idfuncionario", insertable = false, updatable = false, unique = true, nullable = false)
+	@Column(name = "idfuncionario", insertable = false, updatable = false, nullable = false)
 	private Long idFuncionario;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dataalocacao", unique = true, nullable = false)
+	@Column(name = "dataalocacao", nullable = false)
 	private Date dataAlocacao;
 
 	public DepartamentoAlocaFuncionarioPK() {

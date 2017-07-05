@@ -21,6 +21,31 @@ $(function(){
 		selectFunc += '<option value="' + funcionario[i].id + '">' + funcionario[i].nome + '</option>';
 	}
 	selectFunc += '</select>';
-	$("#selectFunc").html(selectFunc);
+	$('#selectFunc').html(selectFunc);
+	
+	
+	$('#ok').click(function() {
+		var idfuncionario = $('#selectFunc option:selected').val();
+		if (idfuncionario == '') {
+			return;
+		}
+		$.ajax({
+			type: 'GET',
+			dataType: 'json',
+			url: 'http://' + window.location.host + '/cargo-atribuido-funcionario/' + idfuncionario,
+			cache: false,
+			async: false,
+						
+			success: function(data) {
+				if (data.length > 0) {
+					
+				}
+				
+			},
+			error: function(jqXHR, textStatus) {
+				console.log('ERROR: ' + textStatus);
+			}					
+		});
+	});
 	
 });

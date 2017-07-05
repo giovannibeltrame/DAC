@@ -14,21 +14,21 @@ public class CargoAtribuidoFuncionarioPK implements Serializable {
 	// default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "idcargo", insertable = false, updatable = false, unique = true, nullable = false)
+	@Column(name = "idcargo", insertable = false, updatable = false, nullable = false)
 	private Long idCargo;
 
-	@Column(name = "iddepartamento", insertable = false, updatable = false, unique = true, nullable = false)
+	@Column(name = "iddepartamento", insertable = false, updatable = false, nullable = false)
 	private Long idDepartamento;
 
-	@Column(name = "idfuncionario", insertable = false, updatable = false, unique = true, nullable = false)
+	@Column(name = "idfuncionario", insertable = false, updatable = false, nullable = false)
 	private Long idFuncionario;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dataalocacao", insertable = false, updatable = false, unique = true, nullable = false)
+	@Column(name = "dataalocacao", insertable = false, updatable = false, nullable = false)
 	private Date dataAlocacao;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dataatribuicao", insertable = false, updatable = false, unique = true, nullable = false)
+	@Column(name = "dataatribuicao", nullable = false)
 	private Date dataAtribuicao;
 
 	public CargoAtribuidoFuncionarioPK() {

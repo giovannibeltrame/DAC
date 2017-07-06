@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -56,6 +58,10 @@ public class Funcionario implements Serializable {
 
 	@Column(length = 32)
 	private String complemento;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(length = 32)
+	private RoleEnum role;
 
 	// //bi-directional many-to-one association to DepartamentoAlocaFuncionario
 	// @OneToMany(mappedBy="funcionario")
@@ -105,6 +111,15 @@ public class Funcionario implements Serializable {
 		// this.unidadeFederativa = unidadeFederativa;
 		// this.unidadeFederativaRG = unidadeFederativaRG;
 		this.cidade = cidade;
+	}
+	
+	
+
+	public Funcionario(String email, String senha, RoleEnum role) {
+		super();
+		this.email = email;
+		this.senha = senha;
+		this.role = role;
 	}
 
 	public Long getId() {
@@ -246,5 +261,15 @@ public class Funcionario implements Serializable {
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
+
+	public RoleEnum getRole() {
+		return role;
+	}
+
+	public void setRole(RoleEnum role) {
+		this.role = role;
+	}
+	
+	
 
 }

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta name="description" content=""/>
+	<meta name="author" content=""/>
 
 	<title>RH-INDO</title>
 
 	<!-- Bootstrap Core CSS -->
-	<link rel="stylesheet" type="text/css" href="../../lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../../lib/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
 	<!-- MetisMenu CSS -->
-	<link rel="stylesheet" type="text/css" href="../../lib/bower_components/metisMenu/dist/metisMenu.min.css">
+	<link rel="stylesheet" type="text/css" href="../../lib/bower_components/metisMenu/dist/metisMenu.min.css"/>
 	<!-- Custom CSS -->
-	<link rel="stylesheet" type="text/css" href="lib/sb-admin-2.css">
+	<link rel="stylesheet" type="text/css" href="lib/sb-admin-2.css"/>
 	<!-- Custom Fonts -->
-	<link rel="stylesheet" type="text/css" href="../../lib/bower_components/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../../lib/bower_components/font-awesome/css/font-awesome.min.css"/>
 	
 	<!-- jQuery -->
 	<script type="text/javascript" src="../../lib/bower_components/jquery/dist/jquery.min.js"></script>	
@@ -246,7 +246,11 @@
 						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Configurações</a>
 						</li>
 						<li class="divider"></li>
-						<li><a href="logout.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+						
+						<li>
+							<form th:action="@{/logout}" method="post" id="logout">
+        						<a href="#" onClick="$('#logout').submit();"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+        					</form>
 						</li>
 					</ul>
 					<!-- /.dropdown-user -->
@@ -269,7 +273,7 @@
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
 						<li>
-							<a href="#funcionario.html" data-href="funcionario.html"><i class="fa fa-gear fa-fw"></i> Gerenciar Funcionários</a>
+							<a href="#gerente/pages/funcionario" data-href="gerente/pages/funcionario"><i class="fa fa-gear fa-fw"></i> Gerenciar Funcionários</a>
 						</li>
 						<li>
 							<a href="#departamento.html" data-href="departamento.html"><i class="fa fa-gear fa-fw"></i> Gerenciar Departamentos</a>
@@ -294,7 +298,7 @@
 		</nav>
 
 		<div id="page-wrapper">
-			<iframe id="content" src="./conta.html" frameborder="0" scrolling="no" />
+			<iframe id="content" src="gerente/pages/funcionario" frameborder="0" scrolling="no" />			
 		</div>
 
 	</div>

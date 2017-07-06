@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import br.ufpr.dac.rhindo.entity.Funcionario;
@@ -17,5 +18,8 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> 
 	public Funcionario findByCpf(String cpf);
 	
 	public Funcionario findByRg(String rg);
+	
+	@Query("select new Funcionario(f.email, f.senha, f.role) from Funcionario f where f.email = :email and f.senha = :senha")
+	public Funcionario loadProfile(@Param("email") String email, @Param("senha") String senha);
 
 }

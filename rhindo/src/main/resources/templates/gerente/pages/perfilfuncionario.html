@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Gerenciar Funcionários</title>
+
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" type="text/css"
+	href="../../lib/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+<!-- w2ui CSS -->
+<link rel="stylesheet" type="text/css"
+	href="../../lib/bower_components/w2ui/w2ui-1.5.rc1.min.css"/>
+
+<!-- jQuery -->
+<script type="text/javascript"
+	src="../../lib/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- jQuery Masked Input -->
+<script type="text/javascript"
+	src="../../lib/bower_components/jquery-maskedinput/jquery.maskedinput.min.js"></script>
+<!-- Bootstrap Core JS -->
+<script type="text/javascript"
+	src="../../lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- w2ui JS -->
+<script type="text/javascript"
+	src="../../lib/bower_components/w2ui/w2ui-1.5.rc1.min.js"></script>
+<script type="text/javascript" src="../../lib/controller/gerente/perfilfuncionario.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="col-xs-12">
+			<h3 class="page-header">Gerenciar Perfil Funcionário</h3>
+		</div>
+		<div class="row">
+			<div class="col-xs-10 col-xs-offset-1">
+					<div class="row" id="msg"></div>
+					<div class="row form-inline">
+						<label for="funcionario">Funcionário: </label>
+						<div id="selectFunc" class="form-group"></div>
+						<button id="ok" class="btn btn-primary">OK</button>
+					</div>
+					<br/>
+					<div class="row form-inline" id="labelDepto">
+						<label for="departamento">Departamento: </label>
+						<div id="selectDepto" class="form-group"></div>
+					</div>
+					<br/>
+					<div class="row form-inline" id="labelCargo">
+						<label for="cargo">Cargo: </label>
+						<div id="selectCargo" class="form-group"></div>
+					</div>
+					<br/>
+					<div class="row" id="labelSave">
+						<button id="save" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Salvar</button>
+					</div>
+					<br/>
+				</div>
+			</div>
+		</div>
+</body>
+</html>
